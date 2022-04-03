@@ -1,6 +1,7 @@
 import express from "express";
 import db from "./models";
 import { users } from "./seeders/users";
+import { projects } from "./seeders/projects";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -11,6 +12,13 @@ const createUsers = () => {
   });
 };
 createUsers();
+
+const createProjects = () => {
+  projects.map((project) => {
+    db.Project.create(project);
+  });
+};
+createProjects();
 
 db.sequelize
   .sync()
