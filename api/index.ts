@@ -11,14 +11,23 @@ const createUsers = () => {
     db.User.create(user);
   });
 };
-createUsers();
+// createUsers();
 
 const createProjects = () => {
   projects.map((project) => {
     db.Project.create(project);
   });
 };
-createProjects();
+// createProjects();
+
+app.get("/", (req, res) => {
+  db.User.findAll()
+    .then((result: object) => {
+      console.log((result as any)[0].name);
+      res.json(result);
+    })
+    .catch((err: Error) => console.log(err));
+});
 
 db.sequelize
   .sync()
